@@ -58,6 +58,11 @@ Please, do **not** put these data files into Git; they are big. Do **not** copy 
 cd /mnt/mimiciv/1.0/core
 ls
 ```
+**contents of 'hosp'**
+```{bash}
+cd /mnt/mimiciv/1.0/hosp
+ls
+```
 
 
 3. Briefly describe what bash commands `zcat`, `zless`, `zmore`, and `zgrep` do.
