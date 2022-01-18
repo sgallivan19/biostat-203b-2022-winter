@@ -207,3 +207,23 @@ Explain the output. Explain the meaning of `"$1"`, `"$2"`, and `"$3"` in this sh
 ### Q5. More fun with Linux
 
 Try following commands in Bash and interpret the results: `cal`, `cal 2021`, `cal 9 1752` (anything unusual?), `date`, `hostname`, `arch`, `uname -a`, `uptime`, `who am i`, `who`, `w`, `id`, `last | head`, `echo {con,pre}{sent,fer}{s,ed}`, `time sleep 5`, `history | tail`.
+
+```{bash}
+cal
+cal 2021 
+cal 9 1752
+```
+'cal' presents this month's calendar. 'cal 2021' presents the entire year of 2021's calendar. 'cal 9 1752' shows the calendar of september 1752. However, 9/3-9/13 are skipped entirely.
+
+```{bash}
+date
+hostname 
+arch 
+uname -a
+uptime
+```
+date shows today's date. 'hostname' shows the hostname of the machine you are working on. 'arch' prints the machine architecture. In this case, 64-bit. 
+
+
+
+
