@@ -74,6 +74,12 @@ ls
 
 3. Briefly describe what bash commands `zcat`, `zless`, `zmore`, and `zgrep` do.
 
+All of the following commands operate on compressed files (like a .gz file) without uncompressing them. 
+zcat views contents of a compressed file.
+zless allows navigation of a compressed file one pageful at a time, going forwards or backwards.
+zmore operates like zless but only allows you to go forwards and read more.
+zgrep allows you to search inside of a compressed file. 
+
 4. What's the output of following bash script?
     ```{bash, eval=F}
     for datafile in /mnt/mimiciv/1.0/core/*.gz
