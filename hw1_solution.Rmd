@@ -69,7 +69,8 @@ ls
 cd /mnt/mimiciv/1.0/icu
 ls
 ```
-
+**Reason for .csv.gz** 
+'gz' stands for gzip, which is a data compression program written for the GNU project. It is the data compression program that Linux systems use because it is free and open-source, without patents or legal constraints. Compressing data like the csv files allows for less required storage capacity, reductions in transmission time and reductions in communication bandwidth. 
 
 3. Briefly describe what bash commands `zcat`, `zless`, `zmore`, and `zgrep` do.
 
