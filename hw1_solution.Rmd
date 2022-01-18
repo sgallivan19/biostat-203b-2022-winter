@@ -53,41 +53,52 @@ Please, do **not** put these data files into Git; they are big. Do **not** copy 
 
 2. Display the contents in the folders `core`, `hosp`, `icu`. Why are these data files distributed as `.csv.gz` files instead of `.csv` (comma separated values) files? Read the page <https://mimic.mit.edu/docs/iv/> to understand what's in each folder.
 
-**contents of 'core'**
+**Solution** 
+
+contents of 'core'
 ```{bash}
 cd /mnt/mimiciv/1.0/core
 ls
 ```
-**contents of 'hosp'**
+contents of 'hosp'
 ```{bash}
 cd /mnt/mimiciv/1.0/hosp
 ls
 ```
 
-**contents of 'icu'**
+contents of 'icu'
 ```{bash}
 cd /mnt/mimiciv/1.0/icu
 ls
 ```
-**Reason for .csv.gz** 
+Reason for .csv.gz:
 'gz' stands for gzip, which is a data compression program written for the GNU project. It is the data compression program that Linux systems use because it is free and open-source, without patents or legal constraints. Compressing data like the csv files allows for less required storage capacity, reductions in transmission time and reductions in communication bandwidth. 
 
 3. Briefly describe what bash commands `zcat`, `zless`, `zmore`, and `zgrep` do.
 
+**Solution**
 All of the following commands operate on compressed files (like a .gz file) without uncompressing them. 
 zcat views contents of a compressed file.
 zless allows navigation of a compressed file one pageful at a time, going forwards or backwards.
 zmore operates like zless but only allows you to go forwards and read more.
 zgrep allows you to search inside of a compressed file. 
 
-4. What's the output of following bash script?
+4.1. What's the output of following bash script?
     ```{bash, eval=F}
     for datafile in /mnt/mimiciv/1.0/core/*.gz
       do
         ls -l $datafile
       done
     ```
-Display the number of lines in each data file using a similar loop.
+**Solution** 
+Script above lists the detailed contents of every file ending in '.gz' within the '/mnt/mimiciv/1.0/core' directory.
+
+4.2.Display the number of lines in each data file using a similar loop.
+
+```{r}
+
+```
+
 
 5. Display the first few lines of `admissions.csv.gz`. How many rows are in this data file? How many unique patients (identified by `subject_id`) are in this data file? (Hint: combine Linux commands `zcat`, `head`/`tail`, `awk`, `sort`, `uniq`, `wc`, and so on.)
 
