@@ -64,6 +64,12 @@ cd /mnt/mimiciv/1.0/hosp
 ls
 ```
 
+**contents of 'icu'**
+```{bash}
+cd /mnt/mimiciv/1.0/icu
+ls
+```
+
 
 3. Briefly describe what bash commands `zcat`, `zless`, `zmore`, and `zgrep` do.
 
