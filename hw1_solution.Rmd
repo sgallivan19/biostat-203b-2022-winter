@@ -188,6 +188,9 @@ wget retrieves content from web servers. '-nc' prevents multiple version saving.
     echo 'hello, world' >> test2.txt
     ```
 
+**Solution**
+"echo '' > filename" overwrites the file. "echo '' >> filename" appends the file. 
+
 3. Using your favorite text editor (e.g., `vi`), type the following and save the file as `middle.sh`:
     ```{bash eval=FALSE}
     #!/bin/sh
