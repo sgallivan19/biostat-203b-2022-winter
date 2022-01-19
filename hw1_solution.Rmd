@@ -90,6 +90,7 @@ zgrep allows you to search inside of a compressed file.
         ls -l $datafile
       done
     ```
+
 **Solution** 
 Script above lists the detailed contents of every file ending in '.gz' within the '/mnt/mimiciv/1.0/core' directory.
 
@@ -207,7 +208,6 @@ Explain the output. Explain the meaning of `"$1"`, `"$2"`, and `"$3"` in this sh
 ### Q5. More fun with Linux
 
 Try following commands in Bash and interpret the results: `cal`, `cal 2021`, `cal 9 1752` (anything unusual?), `date`, `hostname`, `arch`, `uname -a`, `uptime`, `who am i`, `who`, `w`, `id`, `last | head`, `echo {con,pre}{sent,fer}{s,ed}`, `time sleep 5`, `history | tail`.
-
 
 **Solution**
 ```{bash}
