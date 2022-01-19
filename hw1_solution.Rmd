@@ -216,9 +216,9 @@ cal 9 1752
 'cal' presents this month's calendar. 'cal 2021' presents the entire year of 2021's calendar. 'cal 9 1752' shows the calendar of september 1752. However, 9/3-9/13 are skipped entirely.
 
 ```{bash}
-last I head
+time sleep 5
 ```
-date shows today's date. 'hostname' shows the hostname of the machine you are working on. 'arch' prints the machine architecture. In this case, 64-bit. 'uname -a' gets all the system information. 'uptime' gives information such as greenwich mean time, number of online users, how long your system has been running, and system load averages for the past 1, 5 and 15 minutes. 'who am i' displays your username. 'who' provides information on all users currently logged into the system. 'w' shows who is logged in and what they are doing. 'id' presents identity information about the given user.     
+date shows today's date. 'hostname' shows the hostname of the machine you are working on. 'arch' prints the machine architecture. In this case, 64-bit. 'uname -a' gets all the system information. 'uptime' gives information such as greenwich mean time, number of online users, how long your system has been running, and system load averages for the past 1, 5 and 15 minutes. 'who am i' displays your username. 'who' provides information on all users currently logged into the system. 'w' shows who is logged in and what they are doing. 'id' presents identity information about the given user. 'last | head' shows the 10 most recent logged in users and details of their login. 'echo {con,pre}{sent,fer}{s,ed}' gives all combinations of words in English consisting of the 3 different sets. 'time sleep 5' gives the time it takes to run the sleep command, which we set to 5 seconds.      
 
 
 
