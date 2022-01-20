@@ -176,7 +176,7 @@ wget retrieves content from web servers. '-nc' prevents multiple version saving.
     for char in Elizabeth Jane Lydia Darcy
     do
       echo $char:
-      grep $char ~/biostat-203b-2022-winter/pg42671.txt | sort | wc -l
+      grep $char ~/biostat-203b-2022-winter/hw1/pg42671.txt | sort | wc -l
     done
     ```
 
