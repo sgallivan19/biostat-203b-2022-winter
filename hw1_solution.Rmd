@@ -202,6 +202,7 @@ wget retrieves content from web servers. '-nc' prevents multiple version saving.
     
 Using `chmod` make the file executable by the owner, and run 
     ```{bash eval=FALSE}
+    cd ~/biostat-203b-2022-winter/hw1
     ./middle.sh pg42671.txt 20 5
     ```
 Explain the output. Explain the meaning of `"$1"`, `"$2"`, and `"$3"` in this shell script. Why do we need the first line of the shell script?
