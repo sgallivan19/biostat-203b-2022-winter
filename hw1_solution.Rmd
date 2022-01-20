@@ -208,7 +208,7 @@ Using `chmod` make the file executable by the owner, and run
 Explain the output. Explain the meaning of `"$1"`, `"$2"`, and `"$3"` in this shell script. Why do we need the first line of the shell script?
 
 **Solution**
-The output is the last 5 lines of the first 20 lines in the file. "$1" refers to the .txt file, "$2" refers to 20 and "$3" refers to 5. They are the inputs in this middle.sh function. 
+The output is the last 5 lines of the first 20 lines in the file. "$1" refers to the .txt file, "$2" refers to 20 and "$3" refers to 5. They are the inputs in this middle.sh function. We need the first line to indicate that we are running this in the sh shell. 
 
 ### Q5. More fun with Linux
 
