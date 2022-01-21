@@ -117,7 +117,7 @@ zcat admissions.csv.gz | head -3
 Rows in datafile:
 ```{bash}
 cd /mnt/mimiciv/1.0/core
-tail -n +2 admissions.csv.gz | wc -l
+zcat admissions.csv.gz | tail -n +2 | wc -l 
 ```
 
 Unique patients:
