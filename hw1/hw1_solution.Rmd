@@ -135,7 +135,6 @@ sort | tail -n +2 | uniq -c | wc -l
 zcat /mnt/mimiciv/1.0/core/admissions.csv.gz | head -1
 ```
 
-
 admission_type:
 ```{bash}
 zcat /mnt/mimiciv/1.0/core/admissions.csv.gz | tail -n +2 | 
