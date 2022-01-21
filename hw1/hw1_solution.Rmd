@@ -100,7 +100,7 @@ Script above lists the detailed contents of every file ending in '.gz' within th
 ```{bash}
 for datafile in /mnt/mimiciv/1.0/core/*.gz
       do
-        wc -l $datafile
+        zcat $datafile | wc -l
       done
 ```
 
