@@ -123,7 +123,7 @@ zcat admissions.csv.gz | tail -n +2 | wc -l
 Unique patients:
 ```{bash}
 zcat /mnt/mimiciv/1.0/core/admissions.csv.gz | awk -F, '{ print $1 }' |
-sort | tail -n +2 | wc -l 
+sort | tail -n +2 | uniq -c | wc -l 
 ```
 
 
