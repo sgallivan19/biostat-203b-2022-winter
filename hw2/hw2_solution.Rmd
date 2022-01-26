@@ -1,7 +1,7 @@
 ---
 title: "Biostat 203B Homework 2"
 subtitle: Due Feb 6 @ 11:59PM
-author: Your Name
+author: Seamus Gallivan
 output: 
   html_document:
     toc: true
