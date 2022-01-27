@@ -92,9 +92,9 @@ count(icustays_tble, subject_id)
 **Solution**
 
 ```{r}
-icustays_tble <- icustays_tble %>%
+icustays_tble1 <- icustays_tble %>%
   arrange(intime) %>%
-  distinct(subject_id)
+  distinct(subject_id, .keep_all = TRUE)
 ```
 
 
