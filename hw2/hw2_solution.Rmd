@@ -44,6 +44,16 @@ Which function is fastest? Is there difference in the (default) parsed data type
 
 For later questions, we stick to the tidyverse.
 
+**Solution**
+
+```{r}
+system.time(read.csv("/mnt/mimiciv/1.0/core/admissions.csv.gz"))
+system.time(read_csv("/mnt/mimiciv/1.0/core/admissions.csv.gz"))
+system.time(fread("/mnt/mimiciv/1.0/core/admissions.csv.gz"))
+```
+
+fread is the fastest at 0.871 seconds. read_csv is not far behind at 2.184 seconds. The base R read.csv is significantly slower, taking almost 42 seconds. 
+
 ## Q2. ICU stays
 
 `icustays.csv.gz` (<https://mimic.mit.edu/docs/iv/modules/icu/icustays/>) contains data about Intensive Care Units (ICU) stays. The first 10 lines are
