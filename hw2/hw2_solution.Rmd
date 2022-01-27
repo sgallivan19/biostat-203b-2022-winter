@@ -166,8 +166,14 @@ patients_tble<- read_csv("/mnt/mimiciv/1.0/core/patients.csv.gz")
 patients_tble1 <- semi_join(patients_tble, icustays_tble1, by = "subject_id")
 ```
 
-
 2. Summarize variables `gender` and `anchor_age`, and explain any patterns you see.
+
+**Solution**
+
+```{r}
+patients_tble1
+```
+
 
 ## Q5. Lab results
 
@@ -195,6 +201,18 @@ system(
 ```
 
 1. Find how many rows are in `labevents.csv.gz`.
+
+```{r}
+system(
+  str_c(
+    "zcat < ", 
+    shQuote(str_c(mimic_path, "/hosp/d_labitems.csv.gz")), 
+    " | wc -l"
+    ), 
+  intern = TRUE
+)
+```
+
 
 2. We are interested in the lab measurements of creatinine (50912), potassium (50971), sodium (50983), chloride (50902), bicarbonate (50882), hematocrit (51221), white blood cell count (51301), glucose (50931), magnesium (50960), and calcium (50893). Retrieve a subset of `labevents.csv.gz` only containing these items for the patients in `icustays_tble` as a tibble `labevents_tble`. 
 
