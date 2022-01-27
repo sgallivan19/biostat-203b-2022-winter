@@ -125,6 +125,7 @@ admissions_tble <- read_csv("/mnt/mimiciv/1.0/core/admissions.csv.gz")
 ```{r}
 admissions_tble1 <- semi_join(admissions_tble, icustays_tble, 
                               by = c("subject_id", "hadm_id"))
+admissions_tble1
 ```
 
 
@@ -164,6 +165,7 @@ system(
 ```{r}
 patients_tble<- read_csv("/mnt/mimiciv/1.0/core/patients.csv.gz") 
 patients_tble1 <- semi_join(patients_tble, icustays_tble1, by = "subject_id")
+patients_tble1
 ```
 
 2. Summarize variables `gender` and `anchor_age`, and explain any patterns you see.
@@ -202,12 +204,16 @@ system(
 
 1. Find how many rows are in `labevents.csv.gz`.
 
+**Solution**
+
+1630 rows (excluding the header)
+
 ```{r}
 system(
   str_c(
     "zcat < ", 
     shQuote(str_c(mimic_path, "/hosp/d_labitems.csv.gz")), 
-    " | wc -l"
+    " | tail -n +2 | wc -l"
     ), 
   intern = TRUE
 )
@@ -217,6 +223,13 @@ system(
 2. We are interested in the lab measurements of creatinine (50912), potassium (50971), sodium (50983), chloride (50902), bicarbonate (50882), hematocrit (51221), white blood cell count (51301), glucose (50931), magnesium (50960), and calcium (50893). Retrieve a subset of `labevents.csv.gz` only containing these items for the patients in `icustays_tble` as a tibble `labevents_tble`. 
 
     Hint: `labevents.csv.gz` is a data file too big to be read in by the `read_csv` function in its default setting. Utilize the `col_select` and `lazy` options in the `read_csv` function to reduce the memory burden.
+    
+**Solution**
+
+```{r}
+read_csv("/mnt/mimiciv/1.0/hosp/d_labitems.csv.gz", col_types = cols_only(itemid = col_factor(i("50912", "50971", "50983", ))))
+```
+
 
 3. Further restrict `labevents_tble` to the first lab measurement during the ICU stay. 
 4. Summarize the lab measurements by appropriate numerics and graphics. 
