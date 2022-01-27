@@ -87,8 +87,16 @@ subject_id number 10002428 has 4 ICU stays.
 count(icustays_tble, subject_id)
 ```
 
-
 3. For each `subject_id`, let's only keep the first ICU stay in the tibble `icustays_tble`.
+
+**Solution**
+
+```{r}
+icustays_tble <- icustays_tble %>%
+  arrange(intime) %>%
+  distinct(subject_id)
+```
+
 
 ## Q3. `admission` data
 
