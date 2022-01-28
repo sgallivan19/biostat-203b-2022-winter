@@ -140,11 +140,26 @@ admissions_tble1
 **Solution** 
 
 ```{r}
-  
+#admission year  
 c <- ggplot(admissions_tble1, aes(year(admittime)))
 c + geom_bar()
-d <- ggplot(admissions_tble1, aes(lubridate::month(admittime, label = TRUE)))
-d + geom_bar() 
+
+#admission month
+d <- ggplot(admissions_tble1, aes(lubridate::month(admittime, label = T)))
+d + geom_bar() + labs(x = "Month")
+
+#admission month day 
+a <- ggplot(admissions_tble1, aes(lubridate::mday(admittime)))
+a + geom_bar() + labs(x = "month day")
+
+#admission week day 
+b <- ggplot(admissions_tble1, aes(lubridate::wday(admittime, label = T)))
+b + geom_bar() + labs(x = "weekday")
+
+#admission hour
+e <- ggplot(admissions_tble1, aes(lubridate::hour(admittime)))
+e + geom_bar() + labs(x = "hour")
+
 ```
 
 
