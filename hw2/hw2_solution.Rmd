@@ -139,7 +139,7 @@ admissions_tble1
 
 **Solution** 
 
-admission month, monthday and weekly are all uniformly distributed. Interestingly enough, 
+Admission month, monthday and weekly are all uniformly distributed. Interestingly enough, 
 admission hour peaks at midnight, decreases until it spikes at 7am, jumps back down at 8am and 
 gradually increases until 3pm where it stays constant until midnight.   
 
@@ -165,7 +165,6 @@ e <- ggplot(admissions_tble1, aes(lubridate::hour(admittime)))
 e + geom_bar() + labs(x = "hour")
 
 ```
-
 
 ## Q4. `patients` data
 
@@ -196,7 +195,13 @@ patients_tble1
 **Solution**
 
 ```{r}
-patients_tble1
+#summarize gender 
+gender <- ggplot(patients_tble1, aes(gender))
+gender + geom_bar()
+
+#summarize anchor_age
+age <- ggplot(patients_tble1, aes(anchor_age))
+age + geom_histogram()
 ```
 
 
