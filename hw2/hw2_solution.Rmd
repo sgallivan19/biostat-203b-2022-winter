@@ -140,7 +140,11 @@ admissions_tble1
 **Solution** 
 
 ```{r}
-admissions_tble1
+  
+c <- ggplot(admissions_tble1, aes(year(admittime)))
+c + geom_bar()
+d <- ggplot(admissions_tble1, aes(lubridate::month(admittime, label = TRUE)))
+d + geom_bar() 
 ```
 
 
@@ -227,7 +231,10 @@ system(
 **Solution**
 
 ```{r}
-read_csv("/mnt/mimiciv/1.0/hosp/d_labitems.csv.gz", col_types = cols_only(itemid = col_factor(i("50912", "50971", "50983", ))))
+read_csv("/mnt/mimiciv/1.0/hosp/d_labitems.csv.gz", col_types = cols_only(
+  itemid = col_factor(c(
+    "50912", "50971", "50983", "50902", "50882", "51221",
+    "51301", "50931", "50960", "50893"))), lazy)
 ```
 
 
