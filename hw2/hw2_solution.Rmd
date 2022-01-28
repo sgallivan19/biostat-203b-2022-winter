@@ -139,6 +139,10 @@ admissions_tble1
 
 **Solution** 
 
+admission month, monthday and weekly are all uniformly distributed. Interestingly enough, 
+admission hour peaks at midnight, decreases until it spikes at 7am, jumps back down at 8am and 
+gradually increases until 3pm where it stays constant until midnight.   
+
 ```{r}
 #admission year  
 c <- ggplot(admissions_tble1, aes(year(admittime)))
