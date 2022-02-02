@@ -263,8 +263,21 @@ labevents_tble <- read_csv(str_c(mimic_path, "/hosp/labevents_filtered_itemid.cs
   semi_join(icustays_tble, by = c("subject_id")) 
 ```
 
+```{r}
+d_labitems <- read_csv(str_c(mimic_path, "/hosp/d_labitems.csv.gz"))
+labevents_tble <- left_join(labevents_tble, d_labitems, by = "itemid")
+```
 
 3. Further restrict `labevents_tble` to the first lab measurement during the ICU stay. 
+
+```{r}
+labevents_tble <- labevents_tble %>%
+  group_by(subject_id) %>%
+  arrange(charttime) %>%
+  distinct(itemid, .keep_all = TRUE)
+labevents_tble
+```
+
 4. Summarize the lab measurements by appropriate numerics and graphics. 
 
 ## Q6. Vitals from charted events
