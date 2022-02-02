@@ -348,8 +348,18 @@ chartevents_tble <- chartevents_tble %>%
   ungroup()
 ```
 
-
 3. Summarize these vital measurements by appropriate numerics and graphics. 
+
+```{r}
+chartevents_tble
+#label
+sixa <- ggplot(chartevents_tble, aes(label))
+sixa + geom_bar()
+#category
+sixb <- ggplot(chartevents_tble, aes(category))
+sixb + geom_bar()
+```
+
 
 ## Q7. Putting things together
 
