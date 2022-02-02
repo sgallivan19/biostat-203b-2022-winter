@@ -253,7 +253,8 @@ system(
 **Solution**
 
 ```{r}
-labevents_tble <- read_csv(str_c(mimic_path, "/hosp/labevents_filtered_itemid.csv.gz"),
+labevents_tble <- 
+  read_csv(str_c(mimic_path, "/hosp/labevents_filtered_itemid.csv.gz"),
       col_select = c(subject_id, itemid, charttime, valuenum),
       col_types = cols_only(subject_id = col_double(), 
                             itemid = col_double(), 
@@ -279,6 +280,17 @@ labevents_tble
 ```
 
 4. Summarize the lab measurements by appropriate numerics and graphics. 
+
+```{r}
+fivefoura <- ggplot(labevents_tble, aes(category))
+fivefoura + geom_bar()
+
+fivefourb <- ggplot(labevents_tble, aes(fluid))
+fivefourb + geom_bar()
+
+fivefourc <- ggplot(labevents_tble, aes(label))
+fivefourc + geom_bar()
+```
 
 ## Q6. Vitals from charted events
 
