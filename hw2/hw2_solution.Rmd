@@ -253,7 +253,7 @@ system(
 **Solution**
 
 ```{r}
-labevents_tble <- 
+labevents_tble1 <- 
   read_csv(str_c(mimic_path, "/hosp/labevents_filtered_itemid.csv.gz"),
       col_select = c(subject_id, itemid, charttime, valuenum),
       col_types = cols_only(subject_id = col_double(), 
@@ -266,13 +266,13 @@ labevents_tble <-
 
 ```{r}
 d_labitems <- read_csv(str_c(mimic_path, "/hosp/d_labitems.csv.gz"))
-labevents_tble <- left_join(labevents_tble, d_labitems, by = "itemid")
+labevents_tble1 <- left_join(labevents_tble1, d_labitems, by = "itemid")
 ```
 
 3. Further restrict `labevents_tble` to the first lab measurement during the ICU stay. 
 
 ```{r}
-labevents_tble <- labevents_tble %>%
+labevents_tble <- labevents_tble1 %>%
   # pull in intime from icu stay
   left_join(select(icustays_tble, subject_id, intime), by = "subject_id") %>%
   #only lab measures after intime
@@ -282,7 +282,7 @@ labevents_tble <- labevents_tble %>%
   arrange(charttime, .by_group = TRUE) %>%
   slice_head(n = 1) %>%
   ungroup() %>% 
-  select(-charttime, -intime) %>% 
+  select(subject_id, itemid, valuenum) %>% 
   pivot_wider(names_from = itemid, values_from = valuenum) 
 labevents_tble
 
