@@ -273,10 +273,15 @@ labevents_tble <- left_join(labevents_tble, d_labitems, by = "itemid")
 
 ```{r}
 labevents_tble <- labevents_tble %>%
-  group_by(subject_id) %>%
-  arrange(charttime) %>%
-  distinct(itemid, .keep_all = TRUE)
-labevents_tble
+  # pull in intime from icu stay
+  left_join(select(icustays_tble, subject_id, intime), by = "subject_id") %>%
+  #only lab measures after intime
+  filter(charttime >= intime) %>%
+  #first lab measurement after intime for each subjectid x itemid combo
+  group_by(subject_id, itemid) %>%
+  arrange(charttime, .by_group = TRUE) %>%
+  slice_head(n = 1) %>%
+  ungroup()
 ```
 
 4. Summarize the lab measurements by appropriate numerics and graphics. 
@@ -326,12 +331,11 @@ chartevents_tble <-
   read_csv(str_c(mimic_path, "/icu/chartevents_filtered_itemid.csv.gz")) %>%
   left_join(d_items, by = "itemid") %>%
   semi_join(icustays_tble, by = "subject_id")
-
-
 ```
 
-
 2. Further restrict `chartevents_tble` to the first vital measurement during the ICU stay. 
+
+
 
 3. Summarize these vital measurements by appropriate numerics and graphics. 
 
