@@ -376,6 +376,15 @@ and columns contain at least following variables
 - first vital measurements during ICU stay
 - an indicator variable `thirty_day_mort` whether the patient died within 30 days of hospital admission (30 day mortality)
 
+**Solution**
+
+```{r}
+mutate(age_hadm = anchor_age +year(admittime) -anchor_year) %>% 
+  filter(age_hadm > 18) %>% 
+  mutate(thirty_day_mort - ifelse(is.na(deathtime), Inf, deathtime) - admittime <=)
+```
+
+
 ## Q8. Exploratory data analysis (EDA)
 
 Summarize following information using appropriate numerics or graphs.
