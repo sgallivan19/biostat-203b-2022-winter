@@ -320,6 +320,13 @@ system(
 **Solution**
 
 ```{r}
+d_items <- read_csv(str_c(mimic_path, "/icu/d_items.csv.gz"))
+
+chartevents_tble <- 
+  read_csv(str_c(mimic_path, "/icu/chartevents_filtered_itemid.csv.gz")) %>%
+  left_join(d_items, by = "itemid") %>%
+  semi_join(icustays_tble, by = "subject_id")
+
 
 ```
 
