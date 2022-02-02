@@ -281,7 +281,11 @@ labevents_tble <- labevents_tble %>%
   group_by(subject_id, itemid) %>%
   arrange(charttime, .by_group = TRUE) %>%
   slice_head(n = 1) %>%
-  ungroup()
+  ungroup() %>% 
+  select(-charttime, -intime) %>% 
+  pivot_wider(names_from = itemid, values_from = valuenum) 
+labevents_tble
+
 ```
 
 4. Summarize the lab measurements by appropriate numerics and graphics. 
@@ -379,9 +383,36 @@ and columns contain at least following variables
 **Solution**
 
 ```{r}
+admissions_tble %>%
+  arrange(subject_id)
+icustays_tble %>%
+  arrange(subject_id)
+patients_tble %>%
+  arrange(subject_id)
+labevents_tble
+chartevents_tble
+```
+
+
+```{r}
+icustays_tble %>%
+  left_join(patients_tble, by = "subject_id") %>%
+  left_join(admissions_tble, by = c("hadm_id", "subject_id")) %>% 
+  left_join(labevents_tble, by = "subject_id") %>% 
+  arrange(subject_id)
+  
+  
+
+```
+  
+  
+  
+  
+  
+```{r}
 mutate(age_hadm = anchor_age +year(admittime) -anchor_year) %>% 
   filter(age_hadm > 18) %>% 
-  mutate(thirty_day_mort - ifelse(is.na(deathtime), Inf, deathtime) - admittime <=)
+  mutate(thirty_day_mort = ifelse(is.na(deathtime), Inf, deathtime) - admittime <= 30)
 ```
 
 
