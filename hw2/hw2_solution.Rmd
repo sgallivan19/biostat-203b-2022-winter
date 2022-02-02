@@ -335,8 +335,6 @@ chartevents_tble <-
 
 2. Further restrict `chartevents_tble` to the first vital measurement during the ICU stay. 
 
-
-
 3. Summarize these vital measurements by appropriate numerics and graphics. 
 
 ## Q7. Putting things together
