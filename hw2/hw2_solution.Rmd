@@ -333,7 +333,21 @@ chartevents_tble <-
   semi_join(icustays_tble, by = "subject_id")
 ```
 
-2. Further restrict `chartevents_tble` to the first vital measurement during the ICU stay. 
+2. Further restrict `chartevents_tble` to the first vital measurement during the ICU stay.
+
+```{r}
+chartevents_tble <- chartevents_tble %>%
+  # pull in intime from icu stay
+  left_join(select(icustays_tble, subject_id, intime), by = "subject_id") %>%
+  #only lab measures after intime
+  filter(charttime >= intime) %>%
+  #first lab measurement after intime for each subjectid x itemid combo
+  group_by(subject_id, itemid) %>%
+  arrange(charttime, .by_group = TRUE) %>%
+  slice_head(n = 1) %>%
+  ungroup()
+```
+
 
 3. Summarize these vital measurements by appropriate numerics and graphics. 
 
