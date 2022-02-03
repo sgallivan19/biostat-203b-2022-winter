@@ -117,15 +117,15 @@ system(
 **Solution** 
 
 ```{r}
-admissions_tble <- read_csv("/mnt/mimiciv/1.0/core/admissions.csv.gz")
+admissions_tble1 <- read_csv("/mnt/mimiciv/1.0/core/admissions.csv.gz")
 ```
 
 2. Let's only keep the admissions that have a match in `icustays_tble` according to `subject_id` and `hadm_id`.
 
 ```{r}
-admissions_tble <- semi_join(admissions_tble, icustays_tble, 
+admissions_tble <- semi_join(admissions_tble1, icustays_tble, 
                               by = c("subject_id", "hadm_id"))
-admissions_tble
+admissions_tble %>% arrange(subject_id)
 ```
 
 
