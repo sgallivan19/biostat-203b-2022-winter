@@ -183,9 +183,9 @@ system(
 **Solution**
 
 ```{r}
-patients_tble<- read_csv("/mnt/mimiciv/1.0/core/patients.csv.gz") 
-patients_tble <- semi_join(patients_tble, icustays_tble, by = "subject_id")
-patients_tble
+patients_tble1 <- read_csv("/mnt/mimiciv/1.0/core/patients.csv.gz") 
+patients_tble <- semi_join(patients_tble1, icustays_tble, by = "subject_id")
+patients_tble %>% arrange(subject_id)
 ```
 
 2. Summarize variables `gender` and `anchor_age`, and explain any patterns you see.
