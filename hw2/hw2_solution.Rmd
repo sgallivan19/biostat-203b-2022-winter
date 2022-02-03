@@ -331,7 +331,7 @@ system(
 ```{r}
 d_items <- read_csv(str_c(mimic_path, "/icu/d_items.csv.gz"))
 
-chartevents_tble <- 
+chartevents_tble1 <- 
   read_csv(str_c(mimic_path, "/icu/chartevents_filtered_itemid.csv.gz")) %>%
   left_join(d_items, by = "itemid") %>%
   semi_join(icustays_tble, by = "subject_id")
@@ -340,7 +340,7 @@ chartevents_tble <-
 2. Further restrict `chartevents_tble` to the first vital measurement during the ICU stay.
 
 ```{r}
-chartevents_tble <- chartevents_tble %>%
+chartevents_tble <- chartevents_tble1 %>%
   # pull in intime from icu stay
   left_join(select(icustays_tble, subject_id, intime), by = "subject_id") %>%
   #only lab measures after intime
@@ -349,7 +349,10 @@ chartevents_tble <- chartevents_tble %>%
   group_by(subject_id, itemid) %>%
   arrange(charttime, .by_group = TRUE) %>%
   slice_head(n = 1) %>%
-  ungroup()
+  ungroup() %>% 
+  select(subject_id, valuenum, itemid) %>% 
+  pivot_wider(names_from = itemid, values_from = valuenum)
+chartevents_tble
 ```
 
 3. Summarize these vital measurements by appropriate numerics and graphics. 
