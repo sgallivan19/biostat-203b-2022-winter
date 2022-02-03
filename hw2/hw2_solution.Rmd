@@ -402,7 +402,7 @@ icustays_tble %>%
   left_join(patients_tble, by = "subject_id") %>%
   left_join(admissions_tble, by = c("hadm_id", "subject_id")) %>% 
   left_join(labevents_tble, by = "subject_id") %>% 
-  arrange(subject_id)
+  left_join(chartevents_tble, by = "subject_id")
   
   
 
