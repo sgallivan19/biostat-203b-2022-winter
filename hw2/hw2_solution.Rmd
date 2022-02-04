@@ -192,6 +192,8 @@ patients_tble %>% arrange(subject_id)
 
 **Solution**
 
+The majority of the anchor_age distribution lies between 60 and 80 years of age. Gender is male dominant. 
+
 ```{r}
 #summarize gender 
 gender <- ggplot(patients_tble, aes(gender))
