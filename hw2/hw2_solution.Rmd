@@ -402,7 +402,6 @@ mimic_icu_cohort$thirty_day_mort <- ifelse(is.na(mimic_icu_cohort$deathtime), "N
 mimic_icu_cohort
 ```
 
-
 ## Q8. Exploratory data analysis (EDA)
 
 Summarize following information using appropriate numerics or graphs.
