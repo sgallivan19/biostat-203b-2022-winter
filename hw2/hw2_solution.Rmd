@@ -245,7 +245,6 @@ system(
 )
 ```
 
-
 2. We are interested in the lab measurements of creatinine (50912), potassium (50971), sodium (50983), chloride (50902), bicarbonate (50882), hematocrit (51221), white blood cell count (51301), glucose (50931), magnesium (50960), and calcium (50893). Retrieve a subset of `labevents.csv.gz` only containing these items for the patients in `icustays_tble` as a tibble `labevents_tble`. 
 
     Hint: `labevents.csv.gz` is a data file too big to be read in by the `read_csv` function in its default setting. Utilize the `col_select` and `lazy` options in the `read_csv` function to reduce the memory burden.
@@ -282,8 +281,8 @@ labevents_tble <- labevents_tble1 %>%
   arrange(charttime, .by_group = TRUE) %>%
   slice_head(n = 1) %>%
   ungroup() %>% 
-  select(subject_id, itemid, valuenum) %>% 
-  pivot_wider(names_from = itemid, values_from = valuenum) 
+  select(subject_id, label, valuenum) %>% 
+  pivot_wider(names_from = label, values_from = valuenum) 
 labevents_tble
 
 ```
@@ -291,14 +290,10 @@ labevents_tble
 4. Summarize the lab measurements by appropriate numerics and graphics. 
 
 ```{r}
-fivefoura <- ggplot(labevents_tble, aes(category))
-fivefoura + geom_bar()
-
-fivefourb <- ggplot(labevents_tble, aes(fluid))
-fivefourb + geom_bar()
-
-fivefourc <- ggplot(labevents_tble, aes(label))
-fivefourc + geom_bar()
+lab_box <- labevents_tble %>% 
+  select(2:11) %>% 
+  pivot_longer(1:10, names_to = "label", values_to = "values")
+boxplot(lab_box$values ~ lab_box$label, las = 2, xlab = " ", ylab = "values")
 ```
 
 ## Q6. Vitals from charted events
