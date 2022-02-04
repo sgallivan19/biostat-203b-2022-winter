@@ -360,9 +360,12 @@ chartevents_tble
 chart_box <- chartevents_tble %>% 
   select(2:6) %>% 
   pivot_longer(1:5, names_to = "label", values_to = "values")
-boxplot(chart_box$values ~ chart_box$label, 
-        xlab = "measurement", ylab = "values (mixed units)", 
-        ylim = c(0, 300), par(cex.axis = 0.37))
+sixthree <- ggplot(chart_box, aes(x = label, y = values, color = label)) +
+  geom_boxplot()
+sixthree + coord_flip() + xlab("Vital Measurement") +
+  ylab("Results (mixed units)") + 
+  ggtitle("Vital Measurements Boxplots (outliers excluded") +
+  ylim(0, 300)
 ```
 
 
