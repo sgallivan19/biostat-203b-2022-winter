@@ -368,7 +368,6 @@ sixthree + coord_flip() + xlab("Vital Measurement") +
   ylim(0, 300)
 ```
 
-
 ## Q7. Putting things together
 
 Let us create a tibble `mimic_icu_cohort` for all ICU stays, where rows are  
@@ -406,9 +405,52 @@ Summarize following information using appropriate numerics or graphs.
 
 - `thirty_day_mort` vs demographic variables (ethnicity, language, insurance, marital_status, gender, age at hospital admission)
 
+**Solution**
+
+```{r}
+mort_eth <- mimic_icu_cohort %>% 
+  select(ethnicity, thirty_day_mort) %>% 
+  ggplot(aes(thirty_day_mort))
+mort_eth + geom_bar(aes(fill = ethnicity)) + 
+  scale_fill_discrete(name="Ethnicity") + xlab("Thirty day mortality")
+```
+
 - `thirty_day_mort` vs first lab measurements
+
+**Solution**
+
+```{r}
+mort_lab <- mimic_icu_cohort %>% 
+  select(27:36, thirty_day_mort) %>% 
+  pivot_longer(1:10, names_to = "measurement", values_to = "value") %>% 
+  ggplot(aes(thirty_day_mort))
+mort_lab + geom_bar(aes(fill = measurement)) + 
+  scale_fill_discrete(name="Measurement label") + xlab("Thirty day mortality")
+  
+```
 
 - `thirty_day_mort` vs first vital measurements
 
+**Solution**
+
+```{r}
+mort_vital <- mimic_icu_cohort %>% 
+  select(37:41, thirty_day_mort) %>% 
+  pivot_longer(1:5, names_to = "measurement", values_to = "value") %>% 
+  ggplot(aes(thirty_day_mort))
+mort_vital + geom_bar(aes(fill = measurement)) + xlab("Thirty day mortality") +
+  scale_fill_discrete(name="Measurement type")
+```
+
 - `thirty_day_mort` vs first ICU unit
+
+**Solution**
+
+```{r}
+mort_unit <- mimic_icu_cohort %>% 
+  select(first_careunit, thirty_day_mort) %>% 
+  ggplot(aes(thirty_day_mort))
+mort_unit + geom_bar(aes(fill = first_careunit)) + 
+  xlab("Thirty day mortality") + scale_fill_discrete(name="Unit type")
+```
 
