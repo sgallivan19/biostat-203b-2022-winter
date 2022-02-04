@@ -396,26 +396,15 @@ labevents_tble
 chartevents_tble
 ```
 
-
 ```{r}
 icustays_tble %>%
   left_join(patients_tble, by = "subject_id") %>%
   left_join(admissions_tble, by = c("hadm_id", "subject_id")) %>% 
   left_join(labevents_tble, by = "subject_id") %>% 
-  left_join(chartevents_tble, by = "subject_id")
-  
-  
-
-```
-  
-  
-  
-  
-  
-```{r}
-mutate(age_hadm = anchor_age +year(admittime) -anchor_year) %>% 
+  left_join(chartevents_tble, by = "subject_id") %>% 
+  mutate(age_hadm = anchor_age + year(admittime) - anchor_year) %>% 
   filter(age_hadm > 18) %>% 
-  mutate(thirty_day_mort = ifelse(is.na(deathtime), Inf, deathtime) - admittime <= 30)
+  mutate(thirty_day_mort = ifelse(is.na(deathtime), Inf, deathtime) - lubridate::as_datetime(admittime) <= 30)
 ```
 
 
