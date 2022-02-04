@@ -345,21 +345,20 @@ chartevents_tble <- chartevents_tble1 %>%
   arrange(charttime, .by_group = TRUE) %>%
   slice_head(n = 1) %>%
   ungroup() %>% 
-  select(subject_id, valuenum, itemid) %>% 
-  pivot_wider(names_from = itemid, values_from = valuenum)
+  select(subject_id, valuenum, label) %>% 
+  pivot_wider(names_from = label, values_from = valuenum)
 chartevents_tble
 ```
 
 3. Summarize these vital measurements by appropriate numerics and graphics. 
 
 ```{r}
-chartevents_tble
-#label
-sixa <- ggplot(chartevents_tble, aes(label))
-sixa + geom_bar()
-#category
-sixb <- ggplot(chartevents_tble, aes(category))
-sixb + geom_bar()
+chart_box <- chartevents_tble %>% 
+  select(2:6) %>% 
+  pivot_longer(1:5, names_to = "label", values_to = "values")
+boxplot(chart_box$values ~ chart_box$label, 
+        xlab = "measurement", ylab = "values (mixed units)", 
+        ylim = c(0, 300), par(cex.axis = 0.37))
 ```
 
 
