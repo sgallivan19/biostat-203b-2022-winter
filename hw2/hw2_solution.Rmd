@@ -290,6 +290,10 @@ labevents_tble
 4. Summarize the lab measurements by appropriate numerics and graphics. 
 
 ```{r}
+lab_box <- labevents_tble %>% 
+  select(2:11) %>% 
+  pivot_longer(1:10, names_to = "label", values_to = "values")
+
 fivefour <- ggplot(lab_box, aes(x = label, y = values, color = label)) +
   geom_boxplot()
 fivefour + coord_flip() + xlab("Lab Measurement") +
