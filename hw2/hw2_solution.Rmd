@@ -393,8 +393,10 @@ mimic_icu_cohort <- icustays_tble %>%
   left_join(chartevents_tble, by = "subject_id") %>% 
   mutate(age_hadm = anchor_age + year(admittime) - anchor_year) %>% 
   filter(age_hadm > 18) %>% 
-  mutate(thirty_day_mort = ifelse(is.na(deathtime), Inf, ifelse(as.Date(deathtime) -
-           as.Date(admittime) <= 30, "Yes", "No")))
+  mutate(thirty_day_mort = "No")
+mimic_icu_cohort$thirty_day_mort <- ifelse(is.na(mimic_icu_cohort$deathtime), "No", ifelse(lubridate::year(mimic_icu_cohort$deathtime) - 
+         lubridate::year(mimic_icu_cohort$admittime) <= 30, "Yes", "No"))
+  
 mimic_icu_cohort
 ```
 
