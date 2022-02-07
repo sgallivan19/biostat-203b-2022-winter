@@ -205,10 +205,11 @@ pre code {
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] digest_0.6.29   R6_2.5.1        jsonlite_1.7.2  magrittr_2.0.1 
-##  [5] evaluate_0.14   rlang_0.4.12    stringi_1.7.6   jquerylib_0.1.4
-##  [9] bslib_0.3.1     rmarkdown_2.11  tools_3.6.0     stringr_1.4.0  
-## [13] xfun_0.29       yaml_2.2.1      fastmap_1.1.0   compiler_3.6.0 
-## [17] htmltools_0.5.2 knitr_1.37      sass_0.4.0</code></pre>
+##  [5] evaluate_0.14   stringi_1.7.6   rlang_1.0.1     cli_3.1.0      
+##  [9] rstudioapi_0.13 jquerylib_0.1.4 bslib_0.3.1     rmarkdown_2.11 
+## [13] tools_3.6.0     stringr_1.4.0   xfun_0.29       yaml_2.2.1     
+## [17] fastmap_1.1.0   compiler_3.6.0  htmltools_0.5.2 knitr_1.37     
+## [21] sass_0.4.0</code></pre>
 <pre class="r"><code>knitr::opts_chunk$set(echo = TRUE, cache = TRUE, cache.lazy = FALSE)
 library(tidyverse)
 library(data.table)
@@ -312,14 +313,14 @@ system(str_c(&quot;tree -s -L 2 &quot;, shQuote(mimic_path)), intern = TRUE)</co
 <li>Import <code>icustatys.csv.gz</code> as a tibble <code>icustays_tble</code>.</li>
 </ol>
 <p><strong>Solution</strong></p>
-<pre class="r"><code>icustays_tble &lt;- read_csv(&quot;/mnt/mimiciv/1.0/icu/icustays.csv.gz&quot;)</code></pre>
-<pre><code>## Rows: 76540 Columns: 8</code></pre>
-<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+<pre class="r"><code>icustays_tble1 &lt;- read_csv(&quot;/mnt/mimiciv/1.0/icu/icustays.csv.gz&quot;)</code></pre>
+<pre><code>## Rows: 76540 Columns: 8
+## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr  (2): first_careunit, last_careunit
 ## dbl  (4): subject_id, hadm_id, stay_id, los
-## dttm (2): intime, outtime</code></pre>
-<pre><code>## 
+## dttm (2): intime, outtime
+## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <ol start="2" style="list-style-type: decimal">
@@ -327,7 +328,7 @@ system(str_c(&quot;tree -s -L 2 &quot;, shQuote(mimic_path)), intern = TRUE)</co
 </ol>
 <p><strong>Solution</strong></p>
 <p>53,150 unique ‘subject_id’. Yes, from quick glimpse at the tibble below, subject_id number 10002428 has 4 ICU stays.</p>
-<pre class="r"><code>count(icustays_tble, subject_id)</code></pre>
+<pre class="r"><code>count(icustays_tble1, subject_id)</code></pre>
 <pre><code>## # A tibble: 53,150 × 2
 ##    subject_id     n
 ##         &lt;dbl&gt; &lt;int&gt;
@@ -346,9 +347,24 @@ system(str_c(&quot;tree -s -L 2 &quot;, shQuote(mimic_path)), intern = TRUE)</co
 <li>For each <code>subject_id</code>, let’s only keep the first ICU stay in the tibble <code>icustays_tble</code>.</li>
 </ol>
 <p><strong>Solution</strong></p>
-<pre class="r"><code>icustays_tble &lt;- icustays_tble %&gt;%
+<pre class="r"><code>icustays_tble &lt;- icustays_tble1 %&gt;%
   arrange(intime) %&gt;%
-  distinct(subject_id, .keep_all = TRUE)</code></pre>
+  distinct(subject_id, .keep_all = TRUE)
+icustays_tble</code></pre>
+<pre><code>## # A tibble: 53,150 × 8
+##    subject_id  hadm_id  stay_id first_careunit last_careunit intime             
+##         &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;         &lt;dttm&gt;             
+##  1   18106347 24305596 30588857 Cardiac Vascu… Cardiac Vasc… 2110-01-11 10:16:06
+##  2   17195991 23542772 38319097 Surgical Inte… Surgical Int… 2110-01-12 00:54:00
+##  3   16284044 23864737 36817845 Cardiac Vascu… Cardiac Vasc… 2110-01-13 09:09:40
+##  4   18122666 23883987 39753527 Medical/Surgi… Medical/Surg… 2110-01-14 07:22:00
+##  5   18780420 28977824 32140208 Neuro Surgica… Neuro Surgic… 2110-01-17 00:28:00
+##  6   15092543 28768907 38339174 Neuro Interme… Neuro Interm… 2110-01-17 22:49:13
+##  7   13201095 28453791 39953418 Coronary Care… Coronary Car… 2110-01-18 14:46:27
+##  8   12770182 20446666 34901199 Medical Inten… Medical Inte… 2110-01-18 17:47:47
+##  9   12224263 23294937 37546608 Trauma SICU (… Trauma SICU … 2110-01-20 14:01:00
+## 10   19564586 22461053 37310703 Coronary Care… Coronary Car… 2110-01-20 21:06:30
+## # … with 53,140 more rows, and 2 more variables: outtime &lt;dttm&gt;, los &lt;dbl&gt;</code></pre>
 </div>
 <div id="q3.-admission-data" class="section level2">
 <h2>Q3. <code>admission</code> data</h2>
@@ -770,7 +786,8 @@ sixthree + coord_flip() + xlab(&quot;Vital Measurement&quot;) +
   mutate(age_hadm = anchor_age + year(admittime) - anchor_year) %&gt;% 
   filter(age_hadm &gt; 18) %&gt;% 
   mutate(thirty_day_mort = &quot;No&quot;)
-mimic_icu_cohort$thirty_day_mort &lt;- ifelse(is.na(mimic_icu_cohort$deathtime), &quot;No&quot;, ifelse(lubridate::year(mimic_icu_cohort$deathtime) - 
+mimic_icu_cohort$thirty_day_mort &lt;- ifelse(is.na(mimic_icu_cohort$deathtime), 
+         &quot;No&quot;, ifelse(lubridate::year(mimic_icu_cohort$deathtime) - 
          lubridate::year(mimic_icu_cohort$admittime) &lt;= 30, &quot;Yes&quot;, &quot;No&quot;))
   
 mimic_icu_cohort</code></pre>
