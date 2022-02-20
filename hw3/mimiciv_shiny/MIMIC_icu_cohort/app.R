@@ -24,11 +24,11 @@ ui <- fluidPage(
             selectInput("variable",
                         "Variable of interest:",
                         choices = c(
-                          "Ethnicity" = "ethnicity",
-                          "Language" = "language",
-                          "Insurance" = "insurance",
-                          "Marital status" = "marital_status",
-                          "Gender" = "gender")
+                          "Ethnicity",
+                          "Language",
+                          "Insurance",
+                          "Marital status",
+                          "Gender")
                         )
             ),
 
@@ -49,6 +49,7 @@ server <- function(input, output) {
                      "Insurance" = icu_cohort$insurance,
                      "Marital status" = icu_cohort$marital_status,
                      "Gender" = icu_cohort$gender)
+      
         a <- icu_cohort %>% ggplot(aes(thirty_day_mort))
         a + geom_bar(aes(fill = input$variable)) + 
           scale_fill_discrete(name = input$variable) + 
