@@ -51,8 +51,8 @@ server <- function(input, output) {
                      "Gender" = icu_cohort$gender)
       
         a <- icu_cohort %>% ggplot(aes(thirty_day_mort))
-        a + geom_bar(aes(fill = input$variable)) + 
-          scale_fill_discrete(name = input$variable) + 
+        a + geom_bar(aes(fill = data)) + 
+          scale_fill_discrete(name = data) + 
           xlab("Thirty day mortality")
     })
 }
