@@ -98,6 +98,7 @@ admissions_tble <- tbl(con, "admissions") %>%
 # # TODO
 patients_tble <- tbl(con, "patients") %>% 
   semi_join(icustays_tble, by = "subject_id")
+patients_tble
 ```
 
 6. Connect to the `labevents` table and retrieve a subset that only contain subjects who appear in `icustays_tble` and the lab items listed in HW2. 
@@ -108,15 +109,28 @@ patients_tble <- tbl(con, "patients") %>%
 # # TODO
 labevents_tble <- tbl(con, "labevents") %>% 
   semi_join(icustays_tble, by = "subject_id") %>% 
-  filter(itemid == c(50912, 50971, 50983, 50902, 50882, 51221, 
+  filter(itemid %in% c(50912, 50971, 50983, 50902, 50882, 51221, 
                      51301, 50931, 50960, 50893))
+labevents_tble
 ```
 
 Only keep the first lab measurements during ICU stay and pivot lab items to become variables/columns.
 
 ```{r}
 # # TODO
-# labevents_tble <- labevents_tble %>% ...
+labevents_tble <- labevents_tble %>%
+  # pull in intime from icu stay
+  left_join(select(icustays_tble, subject_id, intime), by = "subject_id") %>%
+  #only lab measures after intime
+  filter(charttime >= intime) %>%
+  #first lab measurement after intime for each subjectid x itemid combo
+  group_by(subject_id, itemid) %>%
+  arrange(charttime, .by_group = TRUE) %>%
+  summarise_all(min) %>%
+  ungroup() %>% 
+  select(subject_id, itemid, valuenum) %>% 
+  pivot_wider(names_from = itemid, values_from = valuenum, names_prefix = "lab") 
+labevents_tble
 ```
 
 7. Connect to `chartevents` table and retrieve a subset that only contain subjects who appear in `icustays_tble` and the chart events listed in HW2.
