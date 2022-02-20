@@ -9,6 +9,9 @@
 
 library(shiny)
 
+icu_cohort <- 
+  readRDS("~/biostat-203b-2022-winter/hw3/mimiciv_shiny/icu_cohort.rds")
+
 # Define UI for application that draws a histogram
 ui <- fluidPage(
 
@@ -40,7 +43,7 @@ ui <- fluidPage(
 server <- function(input, output) {
 
     output$barplot <- renderPlot({
-        a <- icu_cohort %>% icu_cohort %>% ggplot(aes(thirty_day_mort))
+        a <- icu_cohort %>% ggplot(aes(thirty_day_mort))
         a + geom_bar(aes(fill = input$variable)) + 
           scale_fill_discrete(name = input$variable) + 
           xlab("Thirty day mortality")

@@ -186,6 +186,7 @@ icu_cohort$thirty_day_mort <- ifelse(is.na(icu_cohort$deathtime),
          "No", ifelse(lubridate::year(icu_cohort$deathtime) - 
          lubridate::year(icu_cohort$admittime) <= 30, "Yes", "No"))
 saveRDS(icu_cohort, file = "icu_cohort.rds")
+icu_cohort
 ```
 
 Close database connection and clear workspace.
