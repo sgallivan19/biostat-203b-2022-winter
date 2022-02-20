@@ -91,9 +91,13 @@ admissions_tble <- tbl(con, "admissions") %>%
 ```
 
 5. Connect to the `patients` table and only keep the patients who have a match in `icustays_tble` (according to `subject_id`).
+
+**Solution** 
+
 ```{r}
 # # TODO
-# patients_tble <-
+patients_tble <- tbl(con, "patients") %>% 
+  semi_join(icustays_tble, by = "subject_id")
 ```
 
 6. Connect to the `labevents` table and retrieve a subset that only contain subjects who appear in `icustays_tble` and the lab items listed in HW2. 
