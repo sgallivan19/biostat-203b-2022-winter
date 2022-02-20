@@ -13,16 +13,20 @@ library(shiny)
 ui <- fluidPage(
 
     # Application title
-    titlePanel("Old Faithful Geyser Data"),
+    titlePanel("MIMICIV Thirty-Day Mortality Data"),
 
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
         sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
+            selectInput("variable",
+                        "Variable of interest:",
+                        choices = c(
+                          "Ethnicity" = "ethnicity",
+                          "Language" = "language",
+                          "Insurance" = "insurance",
+                          "Marital status" = "marital_status",
+                          "Gender" = "gender")
+                    )
         ),
 
         # Show a plot of the generated distribution
