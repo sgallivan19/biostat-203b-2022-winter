@@ -43,6 +43,12 @@ ui <- fluidPage(
 server <- function(input, output) {
 
     output$barplot <- renderPlot({
+      data <- switch(input$variable, 
+                     "Ethnicity" = icu_cohort$ethnicity,
+                     "Language" = icu_cohort$language,
+                     "Insurance" = icu_cohort$insurance,
+                     "Marital status" = icu_cohort$marital_status,
+                     "Gender" = icu_cohort$gender)
         a <- icu_cohort %>% ggplot(aes(thirty_day_mort))
         a + geom_bar(aes(fill = input$variable)) + 
           scale_fill_discrete(name = input$variable) + 
