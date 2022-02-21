@@ -8,6 +8,7 @@
 #
 
 library(shiny)
+library(tidyverse)
 
 icu_cohort <- 
   readRDS("~/biostat-203b-2022-winter/hw3/mimiciv_shiny/icu_cohort.rds")
