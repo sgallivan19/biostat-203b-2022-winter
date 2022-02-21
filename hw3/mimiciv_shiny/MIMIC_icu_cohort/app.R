@@ -22,8 +22,8 @@ ui <- fluidPage(
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
         sidebarPanel(
-            selectInput("variable",
-                        "Variable of interest:",
+            selectInput(inputId = "variable",
+                        label = "Variable of interest:",
                         choices = c(
                           "Ethnicity",
                           "Language",
@@ -42,18 +42,19 @@ ui <- fluidPage(
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
+  
+    variableinput <- reactive({switch(input$variable, 
+                           "Ethnicity" = icu_cohort$ethnicity,
+                           "Language" = icu_cohort$language,
+                           "Insurance" = icu_cohort$insurance,
+                           "Marital status" = icu_cohort$marital_status,
+                           "Gender" = icu_cohort$gender)
+    })
 
     output$barplot <- renderPlot({
-      data <- switch(input$variable, 
-                     "Ethnicity" = icu_cohort$ethnicity,
-                     "Language" = icu_cohort$language,
-                     "Insurance" = icu_cohort$insurance,
-                     "Marital status" = icu_cohort$marital_status,
-                     "Gender" = icu_cohort$gender)
-      
-        a <- icu_cohort %>% ggplot(aes(thirty_day_mort))
-        a + geom_bar(aes(fill = data)) + 
-          scale_fill_discrete(name = data) + 
+        ggplot(icu_cohort, aes(thirty_day_mort)) +
+        geom_bar(aes(fill = variableinput)) + 
+          scale_fill_discrete(name = variableinput) + 
           xlab("Thirty day mortality")
     })
 }
