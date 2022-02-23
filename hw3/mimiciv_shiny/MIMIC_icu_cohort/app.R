@@ -43,17 +43,17 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
   
-    variableinput <- reactive({switch(input$variable, 
-                           "Ethnicity" = icu_cohort$ethnicity,
-                           "Language" = icu_cohort$language,
-                           "Insurance" = icu_cohort$insurance,
-                           "Marital status" = icu_cohort$marital_status,
-                           "Gender" = icu_cohort$gender)
-    })
+       variableinput <- reactive({switch(input$variable, 
+                              "Ethnicity" = "ethnicity",
+                              "Language" = "language",
+                              "Insurance" = "insurance",
+                              "Marital status" = "marital_status",
+                              "Gender" = "gender")
+       })
 
     output$barplot <- renderPlot({
         ggplot(icu_cohort, aes(thirty_day_mort)) +
-        geom_bar(aes(fill = variableinput)) + 
+        geom_bar(aes_string(fill = variableinput)) + 
           scale_fill_discrete(name = variableinput) + 
           xlab("Thirty day mortality")
     })

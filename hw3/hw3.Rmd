@@ -181,12 +181,15 @@ icu_cohort <- icustays_tble %>%
   filter(age_hadm > 18) %>%
   left_join(labevents_tble, by = "subject_id") %>% 
   left_join(chartevents_tble, by = "subject_id") %>%
-  mutate(thirty_day_mort = "No")
-icu_cohort$thirty_day_mort <- ifelse(is.na(icu_cohort$deathtime), 
-         "No", ifelse(lubridate::year(icu_cohort$deathtime) - 
-         lubridate::year(icu_cohort$admittime) <= 30, "Yes", "No"))
-saveRDS(icu_cohort, file = "icu_cohort.rds")
-icu_cohort
+  mutate(thirty_day_mort = ifelse(is.na(dod), "No", 
+                                  ifelse((year(dod) - year(admittime)) <= 30, 
+                                         "Yes", "No")))
+#  mutate(thirty_day_mort = "No")
+#icu_cohort$thirty_day_mort <- ifelse(is.na(icu_cohort$deathtime), 
+#         "No", ifelse(lubridate::year(icu_cohort$deathtime) - 
+#         lubridate::year(icu_cohort$admittime) <= 30, "Yes", "No"))
+
+saveRDS(as.data.frame(icu_cohort), file = "icu_cohort.rds")
 ```
 
 Close database connection and clear workspace.
