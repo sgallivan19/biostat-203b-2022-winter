@@ -181,9 +181,11 @@ icu_cohort <- icustays_tble %>%
   filter(age_hadm > 18) %>%
   left_join(labevents_tble, by = "subject_id") %>% 
   left_join(chartevents_tble, by = "subject_id") %>%
-  mutate(thirty_day_mort = ifelse(is.na(dod), "No", 
-                                  ifelse((year(dod) - year(admittime)) <= 30, 
-                                         "Yes", "No")))
+  mutate(thirty_day_mort = 
+           
+            ifelse(is.na(dod), "No", 
+                                   ifelse((day(dod) - day(admittime)) <= 30, 
+                                          "Yes", "No")))
 
 saveRDS(as.data.frame(icu_cohort), file = "icu_cohort.rds")
 ```
