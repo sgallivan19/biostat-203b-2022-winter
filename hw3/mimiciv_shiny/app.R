@@ -19,7 +19,7 @@ ui <- fluidPage(
     # Application title
     titlePanel("MIMICIV Thirty-Day Mortality Data"),
 
-    # Sidebar with a slider input for number of bins 
+    # Sidebar with a choice input  
     sidebarLayout(
         sidebarPanel(
             selectInput(inputId = "variable",
@@ -40,7 +40,7 @@ ui <- fluidPage(
     )
 )
 
-# Define server logic required to draw a histogram
+# Define server logic required to draw barplot
 server <- function(input, output) {
 
 
