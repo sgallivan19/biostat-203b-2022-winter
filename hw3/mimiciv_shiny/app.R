@@ -105,11 +105,12 @@ server <- function(input, output) {
                           "Glucose" = "lab50931",
                           "Magnesium" = "lab50960",
                           "Calcium" = "lab50893")
+       
        bins <- seq(min(histovar), max(histovar), length.out = input$bins + 1)
        
        hist(histovar, breaks = bins, col = "#75AADB", border = "white",
-            xlab = "Waiting time to next eruption (in mins)",
-            main = "Histogram of waiting times")
+            xlab = "Value",
+            main = "Histogram of lab measurements")
      })
  }
 
