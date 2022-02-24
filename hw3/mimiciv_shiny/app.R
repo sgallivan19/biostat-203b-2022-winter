@@ -24,7 +24,8 @@ ui <- fluidPage(title = "Distributions of Variables",
                     "Insurance",
                      "Marital status",
                       "Gender"))),
-                   tabPanel(title = "Lab Measure Distributions",
+                   tabPanel(title = 
+                              "Lab Measurement and Chart Events Distributions",
                                      plotOutput("histo"),
                                      sliderInput(inputId = "bins",
                                                  label = "Number of bins:",
@@ -54,32 +55,6 @@ ui <- fluidPage(title = "Distributions of Variables",
                   
                 )
 )
-# Define UI for application
-# ui <- fluidPage(
-# 
-#     # Application title
-#     titlePanel("MIMICIV Thirty-Day Mortality Data"),
-# 
-#     # Sidebar with a choice input  
-#     sidebarLayout(
-#         sidebarPanel(
-#             selectInput(inputId = "variable",
-#                         label = "Variable of interest:",
-#                         choices = c(
-#                           "Ethnicity",
-#                           "Language",
-#                           "Insurance",
-#                           "Marital status",
-#                           "Gender")
-#                         )
-#             ),
-# 
-#         # Show a plot of the generated distribution
-#         mainPanel(
-#            plotOutput("barplot")
-#         )
-#     )
-# )
 
 # Define server logic required to draw barplot
 server <- function(input, output) {
@@ -98,6 +73,7 @@ server <- function(input, output) {
           scale_fill_discrete(name = variableinput) + 
           xlab("Thirty day mortality")
     })
+    #histogram
      output$histo <- renderPlot({
        histovar <- switch(input$histvariable,
                           "Creatinine" = "lab50912",
@@ -116,8 +92,9 @@ server <- function(input, output) {
                           "Body temperature in Fahrenheit" = "event223761",
                           "Respiratory rate" = "event220210")
        
-       ggplot(icu_cohort, aes_string(histovar))
-       geom_histogram(bins = input$bins)
+       ggplot(icu_cohort, aes_string(histovar)) +
+       geom_histogram(bins = input$bins) + labs(x = input$histvariable)
+                                                
        
      })
  }
