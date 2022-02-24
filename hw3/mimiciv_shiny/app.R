@@ -43,7 +43,12 @@ ui <- fluidPage(title = "Distributions of Variables",
                                 "White blood cell count",
                                 "Glucose",
                                 "Magnesium",
-                                "Calcium"))
+                                "Calcium",
+                                "Heart rate",
+                                "Mean non-invasive blood pressure",
+                                "Systolic non-invasive blood pressure",
+                                "Body temperature in Fahrenheit",
+                                "Respiratory rate"))
                               
                             )
                   
