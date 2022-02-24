@@ -30,7 +30,20 @@ ui <- fluidPage(title = "Distributions of Variables",
                                                  label = "Number of bins:",
                                                  min = 1,
                                                  max = 100,
-                                                 value = 50)),
+                                                 value = 50),
+                  selectInput(inputId = "histvariable",
+                              label = "Variable of interest:",
+                              choices = c(
+                                "Creatinine",
+                                "Potassium",
+                                "Sodium",
+                                "Chloride",
+                                "Bicarbonate",
+                                "Hematocrit",
+                                "White blood cell count",
+                                "Glucose",
+                                "Magnesium",
+                                "Calcium"))
                               
                             )
                   
@@ -79,6 +92,9 @@ server <- function(input, output) {
         geom_bar(aes_string(fill = variableinput)) + 
           scale_fill_discrete(name = variableinput) + 
           xlab("Thirty day mortality")
+    }),
+    output$histo <- renderPlot({
+      histovar <- switch()
     })
 }
 
