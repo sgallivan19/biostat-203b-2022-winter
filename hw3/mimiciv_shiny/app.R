@@ -106,7 +106,7 @@ server <- function(input, output) {
                           "Magnesium" = "lab50960",
                           "Calcium" = "lab50893")
        
-       ggplot(icu_cohort, aes(histovar))
+       ggplot(icu_cohort, aes_string(histovar))
        geom_histogram(bins = input$bins)
        
      })
