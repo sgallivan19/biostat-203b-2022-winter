@@ -106,11 +106,9 @@ server <- function(input, output) {
                           "Magnesium" = "lab50960",
                           "Calcium" = "lab50893")
        
-       bins <- seq(min(histovar), max(histovar), length.out = input$bins + 1)
+       ggplot(icu_cohort, aes(histovar))
+       geom_histogram(bins = input$bins)
        
-       hist(histovar, breaks = bins, col = "#75AADB", border = "white",
-            xlab = "Value",
-            main = "Histogram of lab measurements")
      })
  }
 
