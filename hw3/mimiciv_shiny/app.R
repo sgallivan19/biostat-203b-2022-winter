@@ -13,32 +13,55 @@ library(tidyverse)
 icu_cohort <- 
   readRDS("~/biostat-203b-2022-winter/hw3/mimiciv_shiny/icu_cohort.rds")
 
-# Define UI for application that draws a histogram
-ui <- fluidPage(
+ui <- fluidPage(title = "Distributions of Variables",
+      tabsetPanel(tabPanel(title = "Thiry Day Mortality by Demographics",
+                    plotOutput("barplot"),
+                    selectInput(inputId = "variable",
+                    label = "Variable of interest:",
+                    choices = c(
+                    "Ethnicity",
+                    "Language",
+                    "Insurance",
+                     "Marital status",
+                      "Gender"))),
+                   tabPanel(title = "Lab Measure Distributions",
+                                     plotOutput("histo"),
+                                     sliderInput(inputId = "bins",
+                                                 label = "Number of bins:",
+                                                 min = 1,
+                                                 max = 100,
+                                                 value = 50)),
+                              
+                            )
+                  
+                )
 
-    # Application title
-    titlePanel("MIMICIV Thirty-Day Mortality Data"),
-
-    # Sidebar with a choice input  
-    sidebarLayout(
-        sidebarPanel(
-            selectInput(inputId = "variable",
-                        label = "Variable of interest:",
-                        choices = c(
-                          "Ethnicity",
-                          "Language",
-                          "Insurance",
-                          "Marital status",
-                          "Gender")
-                        )
-            ),
-
-        # Show a plot of the generated distribution
-        mainPanel(
-           plotOutput("barplot")
-        )
-    )
-)
+# Define UI for application
+# ui <- fluidPage(
+# 
+#     # Application title
+#     titlePanel("MIMICIV Thirty-Day Mortality Data"),
+# 
+#     # Sidebar with a choice input  
+#     sidebarLayout(
+#         sidebarPanel(
+#             selectInput(inputId = "variable",
+#                         label = "Variable of interest:",
+#                         choices = c(
+#                           "Ethnicity",
+#                           "Language",
+#                           "Insurance",
+#                           "Marital status",
+#                           "Gender")
+#                         )
+#             ),
+# 
+#         # Show a plot of the generated distribution
+#         mainPanel(
+#            plotOutput("barplot")
+#         )
+#     )
+# )
 
 # Define server logic required to draw barplot
 server <- function(input, output) {
