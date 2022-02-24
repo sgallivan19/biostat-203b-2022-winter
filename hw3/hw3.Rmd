@@ -190,11 +190,6 @@ icu_cohort <- icustays_tble %>%
 saveRDS(as.data.frame(icu_cohort), file = "icu_cohort.rds")
 ```
 
-```{r}
-icu_cohort
-```
-
-
 Close database connection and clear workspace.
 ```{r, eval=F}
 dbDisconnect(con)
