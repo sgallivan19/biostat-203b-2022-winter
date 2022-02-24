@@ -48,7 +48,7 @@ ui <- fluidPage(title = "Distributions of Variables",
                             )
                   
                 )
-
+)
 # Define UI for application
 # ui <- fluidPage(
 # 
@@ -92,11 +92,23 @@ server <- function(input, output) {
         geom_bar(aes_string(fill = variableinput)) + 
           scale_fill_discrete(name = variableinput) + 
           xlab("Thirty day mortality")
-    }),
-    output$histo <- renderPlot({
-      histovar <- switch()
     })
-}
+     output$histo <- renderPlot({
+       histovar <- switch(input$histvariable,
+                          "Creatinine" = "lab50912",
+                          "Potassium" = "lab50971",
+                          "Sodium" = "lab50983",
+                          "Chloride" = "lab50902",
+                          "Bicarbonate" = "lab50882",
+                          "Hematocrit" = "lab51221",
+                          "White blood cell count" = "lab51301",
+                          "Glucose" = "lab50931",
+                          "Magnesium" = "lab50960",
+                          "Calcium" = "lab50893"
+         
+       )
+     })
+ }
 
 # Run the application 
 shinyApp(ui = ui, server = server)
