@@ -109,7 +109,12 @@ server <- function(input, output) {
                           "White blood cell count" = "lab51301",
                           "Glucose" = "lab50931",
                           "Magnesium" = "lab50960",
-                          "Calcium" = "lab50893")
+                          "Calcium" = "lab50893",
+                          "Heart rate" = "event220045",
+                          "Mean non-invasive blood pressure" = "event220181",
+                          "Systolic non-invasive blood pressure" = "event220179",
+                          "Body temperature in Fahrenheit" = "event223761",
+                          "Respiratory rate" = "event220210")
        
        ggplot(icu_cohort, aes_string(histovar))
        geom_histogram(bins = input$bins)
