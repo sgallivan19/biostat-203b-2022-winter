@@ -196,9 +196,6 @@ Close database connection and clear workspace.
 dbDisconnect(con)
 rm(list = ls())
 ```
-```{r}
-icu_cohort 
-```
 
 ## Q2. Shiny app
 
