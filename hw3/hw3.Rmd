@@ -181,11 +181,12 @@ icu_cohort <- icustays_tble %>%
   filter(age_hadm > 18) %>%
   left_join(labevents_tble, by = "subject_id") %>% 
   left_join(chartevents_tble, by = "subject_id") %>%
-  mutate(thirty_day_mort = 
-           
-            ifelse(is.na(dod), "No", 
-                                   ifelse((day(dod) - day(admittime)) <= 30, 
-                                          "Yes", "No")))
+  collect()
+  
+icu_cohort$thirty_day_mort <- ifelse(is.na(icu_cohort$dod), "No", ifelse(date(icu_cohort$dod) - 
+                                       date(icu_cohort$admittime) <= 30, 
+                                     "Yes", "No"))
+  
 
 saveRDS(as.data.frame(icu_cohort), file = "icu_cohort.rds")
 ```
@@ -194,6 +195,9 @@ Close database connection and clear workspace.
 ```{r, eval=F}
 dbDisconnect(con)
 rm(list = ls())
+```
+```{r}
+icu_cohort 
 ```
 
 ## Q2. Shiny app
