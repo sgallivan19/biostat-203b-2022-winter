@@ -54,15 +54,18 @@ Develop at least two analytic approaches for predicting the 30-day mortality of 
 3. Compare model prediction performance on the test set.
 
 ```{r}
+#install and load keras 
 library(keras)
 install_keras()
 ```
 
 ```{r}
+# install and load reticulate 
 library(reticulate)
 virtualenv_create("r-reticulate")
 ```
 ```{r}
-install.packages('miceRanger')
+# load miceRanger package
+library(miceRanger)
 ```
 
