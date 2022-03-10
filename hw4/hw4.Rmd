@@ -39,6 +39,24 @@ Through the Shiny app developed in HW3, we observe abundant missing values in th
 
 4. Impute missing values by `miceRanger` (request $m=3$ data sets). This step is computational intensive. Make sure to save the imputation results as a file. Hint: Setting `max.depth=10` in the `miceRanger` function may cut some computing time.
 
+```{r}
+require(miceRanger)
+set.seed(1)
+
+seqTime <- system.time(
+  miceObj <- miceRanger(
+      mydata
+    , m = 3
+    , returnModels = FALSE
+    , verbose = FALSE
+    , max.depth = 10
+    
+  )
+)
+miceObj
+```
+
+
 5. Make imputation diagnostic plots and explain what they mean.
 
 6. Choose one of the imputed data sets to be used in Q2. This is **not** a good idea to use just one imputed data set or to average multiple imputed data sets. Explain in a couple of sentences what the correct Multiple Imputation strategy is.
