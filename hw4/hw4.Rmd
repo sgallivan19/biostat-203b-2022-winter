@@ -62,4 +62,7 @@ install_keras()
 library(reticulate)
 virtualenv_create("r-reticulate")
 ```
+```{r}
+install.packages('miceRanger')
+```
 
