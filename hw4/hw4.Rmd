@@ -37,12 +37,25 @@ Through the Shiny app developed in HW3, we observe abundant missing values in th
 
 3. Perform a data quality check of the ICU stays data. Discard variables with substantial missingness, say >5000 `NA`s. Replace apparent data entry errors by `NA`s.
 
+```{r}
+# read rds data 
+icu_cohort <- 
+  read_rds("~/biostat-203b-2022-winter/hw3/mimiciv_shiny/icu_cohort.rds")
+# parse desired variables for miceranger/prediction model
+icu_cohort1 <- icu_cohort %>% 
+  select(
+    
+  )
+  
+```
+
+
 4. Impute missing values by `miceRanger` (request $m=3$ data sets). This step is computational intensive. Make sure to save the imputation results as a file. Hint: Setting `max.depth=10` in the `miceRanger` function may cut some computing time.
 
 ```{r}
 require(miceRanger)
 set.seed(1)
-
+  
 seqTime <- system.time(
   miceObj <- miceRanger(
       mydata
