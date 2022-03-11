@@ -182,7 +182,13 @@ logreg <- glm(thirty_day_mort ~ . -thirty_day_mort,
 # display results 
 summary(logreg)
 # predicted values
-predict(logreg, type="response") 
+log_prob <- predict(logreg, type = "response")
+#translate probabilities to predictions
+log_predict <- ifelse(log_prob > .5, 1, 0)
+#confusion matrix
+table(predicted = log_predict, observed = df_train_logreg$thirty_day_mort)
+# accuracy 
+cat("Test Accuracy:", mean(log_predict == df_train_logreg$thirty_day_mort))
 ```
 
 
