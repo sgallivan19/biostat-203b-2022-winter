@@ -41,6 +41,8 @@ MNAR: missing not at random
 
 2. Explain in a couple of sentences how the Multiple Imputation by Chained Equations (MICE) work.
 
+**Solution**
+
 A variable, x, is chosen at random and the other variables are used to predict x's values using a random forest algorithm. The next variable in line then uses the other variables (including the now full with no missing values variable x) to predict its values using a random forest algorithm. This goes on until all variables now have full non-missing data. The process does not stop though. Previously imputed values in a variable are re-imputed by running a random forest prediction algorithm using all of the other full variables. This re-imputation process is iteraterd through each variable. Once through the whole dataset, imputed variable values are re-imputated again! This re-imputation process is done several times, iterating over the full dataset, hence the term "multiple imputation". 
 
 3. Perform a data quality check of the ICU stays data. Discard variables with substantial missingness, say >5000 `NA`s. Replace apparent data entry errors by `NA`s.
@@ -95,6 +97,10 @@ icu_cohort_imputed %>%
 5. Make imputation diagnostic plots and explain what they mean.
 
 6. Choose one of the imputed data sets to be used in Q2. This is **not** a good idea to use just one imputed data set or to average multiple imputed data sets. Explain in a couple of sentences what the correct Multiple Imputation strategy is.
+
+**Solution**
+
+
 
 ## Q2. Predicting 30-day mortality
 
