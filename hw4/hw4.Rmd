@@ -112,6 +112,19 @@ These plotCorrelations models shows us a boxplot of the correlations between imp
 plotModelError(icu_cohort_imputed)
 ```
 
+Each of these models return the OOB accuracy for classification and r-squared for regression. We can see how these converged as the iterations progress. 
+
+```{r}
+plotVarImportance(icu_cohort_imputed)
+```
+
+These plots show the variable importance for each imputed variable. The top axis contains the variable that was used to impute the variable on the left axis.
+
+```{r}
+plotImputationVariance(icu_cohort_imputed)
+```
+
+The imputation variance plots show how “certain” we were of our imputations. This gives us a feel for the variance experienced for each imputed value between the datasets.
 
 6. Choose one of the imputed data sets to be used in Q2. This is **not** a good idea to use just one imputed data set or to average multiple imputed data sets. Explain in a couple of sentences what the correct Multiple Imputation strategy is.
 
