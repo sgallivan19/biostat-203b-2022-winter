@@ -96,6 +96,20 @@ icu_cohort_imputed %>%
 
 5. Make imputation diagnostic plots and explain what they mean.
 
+```{r}
+plotDistributions(icu_cohort_imputed)
+```
+
+These models plot the imputed distributions compared to the original distribution for each variable. The red line is the density of the original, nonmissing data. The smaller, black lines are the density of the imputed values in each of the datasets. For those variables where the lines do not match up, it may tell us that our data was not MCAR. 
+
+```{r}
+plotCorrelations(icu_cohort_imputed)
+```
+```{r}
+plotModelError(icu_cohort_imputed)
+```
+
+
 6. Choose one of the imputed data sets to be used in Q2. This is **not** a good idea to use just one imputed data set or to average multiple imputed data sets. Explain in a couple of sentences what the correct Multiple Imputation strategy is.
 
 **Solution**
