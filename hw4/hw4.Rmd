@@ -105,6 +105,9 @@ These models plot the imputed distributions compared to the original distributio
 ```{r}
 plotCorrelations(icu_cohort_imputed)
 ```
+
+These plotCorrelations models shows us a boxplot of the correlations between imputed values in every combination of datasets, at each iteration. This helps us know how our values between datasets converged over the iterations.
+
 ```{r}
 plotModelError(icu_cohort_imputed)
 ```
