@@ -185,7 +185,6 @@ lambda_1se <- cv.out$lambda.1se
 coef(cv.out, s = lambda_1se)
 ```
 
-
 3. Compare model prediction performance on the test set.
 
 **Logistic regression with lasso penalty test results**
@@ -195,10 +194,11 @@ x_test <- model.matrix(df_test$thirty_day_mort ~ ., df_test)
 #predict thirty day mortality 
 lasso_prob <- predict(cv.out, newx = x_test, s = lambda_1se, type = "response")
 #translate probabilities to predictions
-lasso_predict <- rep("neg", nrow(df_test))
-lasso_predict[lasso_prob > .5] <- "pos"
+lasso_predict <- ifelse(lasso_prob > .5, "Yes", "No")
 #confusion matrix
-table(pred = lasso_predict, true = df_test$thirty_day_mort)
+table(predicted = lasso_predict, observed = df_test$thirty_day_mort)
+# accuracy 
+cat("Test Accuracy:", mean(lasso_predict == df_test$thirty_day_mort))
 ```
 
 ```{r}
