@@ -76,7 +76,7 @@ require(miceRanger)
 set.seed(1)
 # impute values using miceRanger
 seqTime <- system.time(
-  miceObj <- miceRanger(
+  icu_cohort_imputed <- miceRanger(
       icu_cohort2
     , m = 3
     , returnModels = FALSE
@@ -85,7 +85,8 @@ seqTime <- system.time(
     
   )
 )
-saveRDS(as.data.frame(miceObj), file = "miceObj.rds")
+icu_cohort_imputed %>%
+    write_rds("icu_cohort_imputed.rds")
 ```
 
 
