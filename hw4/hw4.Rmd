@@ -145,6 +145,23 @@ Develop at least two analytic approaches for predicting the 30-day mortality of 
 
 1. Partition data into 80% training set and 20% test set. Stratify partitioning according the 30-day mortality status.
 
+```{r}
+# extract a dataset from the three imputed datasets
+df <- icu_cohort_imputed$data
+# partition data into training and test 
+# load caret library 
+library(caret)
+# set seed
+set.seed(3456)
+# create index for training data 
+train_index <- caret::createDataPartition(df$thirty_day_mort, p = .8,
+                                          list = F,
+                                          times = 1)
+# create train and test dfs from indices
+df_train <- df[train_index,]
+df_test  <- df[-train_index,]
+```
+
 2. Train the models using the training set.
 
 3. Compare model prediction performance on the test set.
@@ -159,9 +176,5 @@ install_keras()
 # install and load reticulate 
 library(reticulate)
 virtualenv_create("r-reticulate")
-```
-```{r}
-# load miceRanger package
-library(miceRanger)
 ```
 
