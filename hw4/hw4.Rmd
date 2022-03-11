@@ -137,7 +137,7 @@ The imputation variance plots show how “certain” we were of our imputations.
 
 **Solution**
 
-
+The correct multiple imputation strategy is to conduct analyses on each of the imputed datasets separately and then pool all of the results. 
 
 ## Q2. Predicting 30-day mortality
 
