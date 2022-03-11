@@ -147,10 +147,8 @@ Develop at least two analytic approaches for predicting the 30-day mortality of 
 
 ```{r}
 # extract a dataset from the three imputed datasets
-df <- icu_cohort_imputed$data
 d <- completeData(icu_cohort_imputed)
-d$Dataset_1
-summary(d$Dataset_1)
+df <- d$Dataset_1
 # partition data into training and test 
 # load caret library 
 library(caret)
