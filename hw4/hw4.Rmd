@@ -52,6 +52,7 @@ icu_cohort1 <- icu_cohort %>%
   )
 # examine variables for outliers  and substantial missingness 
 summary(icu_cohort1)
+colSums(is.na(icu_cohort1))
 # replace chart and lab events < 0 with NA 
 icu_cohort2 <- icu_cohort1 %>% 
   mutate(
