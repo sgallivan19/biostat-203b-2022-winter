@@ -148,6 +148,9 @@ Develop at least two analytic approaches for predicting the 30-day mortality of 
 ```{r}
 # extract a dataset from the three imputed datasets
 df <- icu_cohort_imputed$data
+d <- completeData(icu_cohort_imputed)
+d$Dataset_1
+summary(d$Dataset_1)
 # partition data into training and test 
 # load caret library 
 library(caret)
@@ -164,7 +167,41 @@ df_test  <- df[-train_index,]
 
 2. Train the models using the training set.
 
+**Logistic regression with lasso penalty**
+```{r}
+#load required library
+library(glmnet)
+#create covariate matrix and predictor variable as x and y 
+x <- model.matrix(thirty_day_mort ~ ., df_train)
+y <- df_train$thirty_day_mort
+#find optimal value of lambda
+#family= binomial => logistic regression, alpha=1 => lasso
+cv.out <- cv.glmnet(x, y, alpha=1, family = "binomial", type.measure = "auc" )
+#plot result
+#plot(cv.out)
+#min value of lambda
+lambda_min <- cv.out$lambda.min
+#best value of lambda
+lambda_1se <- cv.out$lambda.1se
+#regression coefficients from the model 
+coef(cv.out, s = lambda_1se)
+```
+
+
 3. Compare model prediction performance on the test set.
+
+**Logistic regression with lasso penalty test results**
+```{r}
+#get test data
+x_test <- model.matrix(df_test$thirty_day_mort ~ ., df_test)
+#predict thirty day mortality 
+lasso_prob <- predict(cv.out, newx = x_test, s = lambda_1se, type = "response")
+#translate probabilities to predictions
+lasso_predict <- rep("neg", nrow(df_test))
+lasso_predict[lasso_prob > .5] <- "pos"
+#confusion matrix
+table(pred = lasso_predict, true = df_test$thirty_day_mort)
+```
 
 ```{r}
 #install and load keras 
