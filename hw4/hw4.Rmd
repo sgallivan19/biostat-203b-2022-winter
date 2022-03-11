@@ -165,6 +165,27 @@ df_test  <- df[-train_index,]
 
 2. Train the models using the training set.
 
+**Logistic regression**
+```{r}
+# change thirty day mortality entries to binary instead of string 
+df_train_logreg <- df_train %>% 
+  mutate(
+    thirty_day_mort = ifelse(thirty_day_mort == "Yes", 1, 0)
+  )
+df_test_logreg <- df_test %>% 
+  mutate(
+    thirty_day_mort = ifelse(thirty_day_mort == "Yes", 1, 0)
+  )
+# log reg model 
+logreg <- glm(thirty_day_mort ~ . -thirty_day_mort, 
+                data = df_train_logreg, family = binomial())
+# display results 
+summary(logreg)
+# predicted values
+predict(logreg, type="response") 
+```
+
+
 **Logistic regression with lasso penalty**
 ```{r}
 #load required library
