@@ -81,7 +81,7 @@ icu_cohort2 <- icu_cohort1 %>%
 
 **Solution**
 
-```{r}
+```{r eval=FALSE}
 require(miceRanger)
 set.seed(1)
 # impute values using miceRanger
@@ -223,8 +223,8 @@ table(predicted = log_predict, observed = df_test_logreg$thirty_day_mort)
 cat("Test Accuracy:", mean(log_predict == df_test_logreg$thirty_day_mort))
 ```
 
-
 **Logistic regression with lasso penalty test results**
+
 ```{r}
 #get test data
 x_test <- model.matrix(df_test$thirty_day_mort ~ ., df_test)
@@ -237,16 +237,3 @@ table(predicted = lasso_predict, observed = df_test$thirty_day_mort)
 # accuracy 
 cat("Test Accuracy:", mean(lasso_predict == df_test$thirty_day_mort))
 ```
-
-```{r}
-#install and load keras 
-library(keras)
-install_keras()
-```
-
-```{r}
-# install and load reticulate 
-library(reticulate)
-virtualenv_create("r-reticulate")
-```
-
