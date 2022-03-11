@@ -42,11 +42,16 @@ Through the Shiny app developed in HW3, we observe abundant missing values in th
 icu_cohort <- 
   read_rds("~/biostat-203b-2022-winter/hw3/mimiciv_shiny/icu_cohort.rds")
 # parse desired variables for miceranger/prediction model
+icu_cohort
 icu_cohort1 <- icu_cohort %>% 
   select(
-    
+    gender, anchor_age, insurance, language, marital_status, ethnicity, 
+    lab50912, lab50882, lab50960, lab50983, lab50893, lab50902, lab51221,
+    lab50971, lab51301, lab50931, event220210, lab51301, lab50931, event220210,
+    event223761, event220179, event220045, event220181, thirty_day_mort
   )
-  
+# examine variables for outliers  and substantial missingness 
+summary(icu_cohort1)
 ```
 
 
