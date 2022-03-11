@@ -166,6 +166,7 @@ df_test  <- df[-train_index,]
 2. Train the models using the training set.
 
 **Logistic regression**
+
 ```{r}
 # change thirty day mortality entries to binary instead of string 
 df_train_logreg <- df_train %>% 
@@ -181,18 +182,10 @@ logreg <- glm(thirty_day_mort ~ . -thirty_day_mort,
                 data = df_train_logreg, family = binomial())
 # display results 
 summary(logreg)
-# predicted values
-log_prob <- predict(logreg, type = "response")
-#translate probabilities to predictions
-log_predict <- ifelse(log_prob > .5, 1, 0)
-#confusion matrix
-table(predicted = log_predict, observed = df_train_logreg$thirty_day_mort)
-# accuracy 
-cat("Test Accuracy:", mean(log_predict == df_train_logreg$thirty_day_mort))
 ```
 
-
 **Logistic regression with lasso penalty**
+
 ```{r}
 #load required library
 library(glmnet)
@@ -213,6 +206,23 @@ coef(cv.out, s = lambda_1se)
 ```
 
 3. Compare model prediction performance on the test set.
+
+**Logistic regression**
+
+```{r}
+# model 
+logreg_test <- glm(thirty_day_mort ~ . -thirty_day_mort, 
+                data = df_test_logreg, family = binomial())
+# predicted values
+log_prob <- predict(logreg_test, type = "response")
+#translate probabilities to predictions
+log_predict <- ifelse(log_prob > .5, 1, 0)
+#confusion matrix
+table(predicted = log_predict, observed = df_test_logreg$thirty_day_mort)
+# accuracy 
+cat("Test Accuracy:", mean(log_predict == df_test_logreg$thirty_day_mort))
+```
+
 
 **Logistic regression with lasso penalty test results**
 ```{r}
