@@ -63,16 +63,15 @@ icu_cohort2 <- icu_cohort1 %>%
   )
 ```
 
-
 4. Impute missing values by `miceRanger` (request $m=3$ data sets). This step is computational intensive. Make sure to save the imputation results as a file. Hint: Setting `max.depth=10` in the `miceRanger` function may cut some computing time.
 
 ```{r}
 require(miceRanger)
 set.seed(1)
-  
+# impute values using miceRanger
 seqTime <- system.time(
   miceObj <- miceRanger(
-      mydata
+      icu_cohort2
     , m = 3
     , returnModels = FALSE
     , verbose = FALSE
@@ -80,7 +79,7 @@ seqTime <- system.time(
     
   )
 )
-miceObj
+saveRDS(as.data.frame(miceObj), file = "miceObj.rds")
 ```
 
 
