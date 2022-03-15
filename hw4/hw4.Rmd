@@ -104,6 +104,7 @@ icu_cohort_imputed %>%
 **Solution**
 
 ```{r}
+icu_cohort_imputed <- read_rds("icu_cohort_imputed.rds")
 plotDistributions(icu_cohort_imputed)
 ```
 
